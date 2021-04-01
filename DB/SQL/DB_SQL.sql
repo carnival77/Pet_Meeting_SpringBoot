@@ -162,3 +162,89 @@ CREATE TABLE IF NOT exists `petmeeting`.`Comment`(
 	COLLATE = utf8mb4_0900_ai_ci
 	COMMENT = 'When CID=1, unknown issue occured\nSo, we never mind of index 1 of CID';
 
+
+-- -----------------------------------------------------
+-- Table `petmeeting`.`Housing`
+-- -----------------------------------------------------
+DROP TABLE IF exists `petmeeting`.`Housing`;
+
+CREATE TABLE IF NOT exists `petmeeting`.`Housing`(
+	`HousingID` int not null auto_increment primary key,
+    `Name` varchar(45) not null)
+    ENGINE = InnoDB
+	DEFAULT CHARACTER SET = utf8mb4
+	COLLATE = utf8mb4_0900_ai_ci;
+    
+    
+-- -----------------------------------------------------
+-- Table `petmeeting`.`City`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `petmeeting`.`City` ;
+
+CREATE TABLE IF NOT exists `petmeeting`.`City`(
+	`CityID` int not null auto_increment primary key,
+    `Name` varchar(45) not null)
+	ENGINE = InnoDB
+	DEFAULT CHARACTER SET = utf8mb4
+	COLLATE = utf8mb4_0900_ai_ci;
+    
+    
+-- -----------------------------------------------------
+-- Table `petmeeting`.`Entrust_Application`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `petmeeting`.`Entrust_Application` ;
+
+CREATE TABLE IF NOT exists `petmeeting`.`Entrust_Application`(
+	`EID` int not null auto_increment primary key,
+    `Text` text not null,
+    `Start_Date` datetime not null,
+    `End_Date` datetime not null,
+    `Preypayment` int not null,
+    `Toypayment` int not null,
+    `Created_Date` datetime not null,
+    `CityID` int not null,
+    `UID` int not null,
+    index `CityID_idx` (`CityID` ASC) VISIBLE,
+    index `UID_idx` (`UID` ASC) VISIBLE,
+    constraint `EN_CityID_key`
+		foreign key (`CityID`) references `petmeeting`.`City` (`CityID`)
+        on delete restrict
+        on update restrict,
+	constraint `EN_UID_key`
+		foreign key (`UID`) references `petmeeting`.`User` (`UID`)
+        on delete cascade
+        on update restrict)
+	ENGINE = InnoDB
+	DEFAULT CHARACTER SET = utf8mb4
+	COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- type 변환
+-- Start_Date, End_Date : date -> datetime
+-- Preypayment, Toypayment : tinyint -> int
+
+    
+--------- ----------------------------------------------
+-- Table `petmeeting`.`Housings`
+-- -----------------------------------------------------
+-- DROP TABLE IF EXDD
+-- CREATE TABLE IF NOT exists `petmeeting`.`Housings`(
+-- 	
+
+
+
+
+-- -----------------------------------------------------
+-- Table `petmeeting`.`Pet`
+-- -----------------------------------------------------
+-- DROP TABLE IF exists `petmeeting`.`Pet`;
+
+-- CREATE TABLE IF NOT exists `petmeeting`.`Pet`(
+-- 	`PID` int not null auto_increment primary key,
+--     `Name` varchar(45) not null,
+--     `Year` int not null,
+--     `GenderID` int not null,
+--     `GradeRatio` int not null,
+--     `Description` Text not null,
+--     `imgID` int not null,
+--     `dd 
