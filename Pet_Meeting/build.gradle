@@ -1,12 +1,25 @@
 plugins {
-	id 'org.springframework.boot' version '2.4.4'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	// id 'org.springframework.boot' version '2.4.4'
+	// id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+		id 'org.springframework.boot' version '2.2.1.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'java'
+		id 'war'
 }
 
 group = 'com.pm'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
+
+configurations {
+	developmentOnly
+	runtimeClasspath {
+		extendsFrom developmentOnly
+	}
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
 
 repositories {
 	mavenCentral()
@@ -17,6 +30,71 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	
+	//spring boot default lib
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.0.1'
+	
+	// https://mvnrepository.com/artifact/org.mybatis/mybatis
+implementation group: 'org.mybatis', name: 'mybatis', version: '3.5.6'
+	
+	// https://mvnrepository.com/artifact/org.mybatis/mybatis-spring
+implementation group: 'org.mybatis', name: 'mybatis-spring', version: '2.0.1'
+
+// https://mvnrepository.com/artifact/org.springframework/spring-jdbc
+implementation group: 'org.springframework', name: 'spring-jdbc', version: '5.3.5'
+
+
+// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-jdbc
+implementation group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: '2.4.2'
+
+// https://mvnrepository.com/artifact/mysql/mysql-connector-java
+//implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.23'
+	// mysql
+	implementation 'mysql:mysql-connector-java'
+
+// https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2
+implementation group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.8.0'
+
+	
+	
+		// Database �ʱ�ȭ �� JPA ���̺귯��
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	
+		// ���� JSP ���̺귯��
+	//providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	implementation 'javax.servlet:jstl'
+	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+	
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-tomcat
+implementation group: 'org.springframework.boot', name: 'spring-boot-starter-tomcat', version: '2.4.4'
+	
+	
+		//anotation lib
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	
+		// ������ ��Ʈ ���� ��(Ŭ���� �ڵ� ���δ� ��)
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	
+		//test lib
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		//exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+
+	// https://mvnrepository.com/artifact/org.apache.commons/commons-collections4
+implementation group: 'org.apache.commons', name: 'commons-collections4', version: '4.4'
+	
+	
+	// https://mvnrepository.com/artifact/commons-io/commons-io
+implementation group: 'commons-io', name: 'commons-io', version: '2.8.0'
+	
+	
+		// �׽�Ʈ �����ӿ�ũ(Spock) ���� ��ũ��Ʈ(Groovy) ���̺귯��
+	implementation 'org.codehaus.groovy:groovy-all:2.5.8'
+	
+	// https://mvnrepository.com/artifact/junit/junit
+testImplementation group: 'junit', name: 'junit', version: '4.13.1'
+	
 }
 
 test {
