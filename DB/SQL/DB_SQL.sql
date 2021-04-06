@@ -29,11 +29,11 @@ DROP TABLE IF exists `petmeeting`.`User`;
 
 CREATE TABLE IF NOT exists `petmeeting`.`User`(
 	`UID` int not null auto_increment primary key,
-    `Username` varchar(45) not null,
+    `Username` varchar(45) not null unique,
     `Password` varchar(45) not null,
     `ImgID` int not null,
-    `Email` varchar(45) null default null,
-    `Phone` varchar(45) null default null,
+    `Email` varchar(45) null default null unique,
+    `Phone` varchar(45) null default null unique,
     INDEX `US_ImgID_key_idx` (`ImgID` ASC) VISIBLE,
     constraint `US_ImgID_key`
 		foreign key (`ImgID`) references `petmeeting`.`Image` (`ImgID`)

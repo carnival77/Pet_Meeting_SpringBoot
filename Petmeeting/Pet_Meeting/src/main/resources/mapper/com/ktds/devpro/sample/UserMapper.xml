@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+   namespace="com.pm.app.main.mapper.UserMapper">
+   
+	<select id="selectUserList"
+		resultType="com.pm.app.main.vo.UserVO">
+		select
+		`UID`,`Username`,`ImgID`,`Email`,`Phone`
+		from `petmeeting`.`User`
+	</select>
+
+	<select id="selectUser"
+		resultType="com.pm.app.main.vo.UserVO" parameterType="String">
+		select
+		`Username`,`ImgID`,`Email`,`Phone`
+		from `petmeeting`.`User`
+		where `Email` = #{Email}
+	</select>
+
+	<insert id="registerUser"
+		parameterType="com.pm.app.main.vo.UserVO">
+		insert into
+		`petmeeting`.`User`
+		 (
+		 `Username`, `Password`,`ImgID`,`Email`,`Phone` )
+		values (
+		#{Username},#{Password},#{ImgID},#{Email},#{Phone})
+	</insert>
+
+	<update id="updateUser"
+		parameterType="com.pm.app.main.vo.UserVO">
+		update `petmeeting`.`User`
+		set
+		`Username`= #{UID}, `Password` = #{Password},`ImgID`=#{ImgID},`Email`=#{Email},`Phone`=#{Phone}
+		where
+		`Password` = #{Password}
+	</update>
+
+	<delete id="deleteManager" parameterType="string">
+		delete
+		from `petmeeting`.`User`
+		where
+		`Password` =
+		#{Password}
+	</delete>
+
+
+<!-- 	<select id="loginManager" -->
+<!-- 		resultType="com.ktds.devpro.admin.vo.AdminVO" -->
+<!-- 		parameterType="com.ktds.devpro.admin.vo.AdminVO"> -->
+<!-- 		select id, pwd from Admin -->
+<!-- 		where id = #{id} and pwd = -->
+<!-- 		#{pwd} -->
+
+<!-- 	</select> -->
+   
+   
+   
+   
+</mapper>
