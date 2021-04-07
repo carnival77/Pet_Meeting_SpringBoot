@@ -1,4 +1,4 @@
-package com.pm.app.community.service;
+package com.ktds.devpro.community.service;
 
 import java.util.List;
 import java.util.Map;

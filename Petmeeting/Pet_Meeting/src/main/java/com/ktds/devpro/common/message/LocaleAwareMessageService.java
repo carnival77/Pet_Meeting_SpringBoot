@@ -1,4 +1,4 @@
-package com.pm.common.message;
+package com.ktds.devpro.common.message;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;

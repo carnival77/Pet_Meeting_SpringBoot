@@ -1,4 +1,4 @@
-package com.pm.app.community.mapper;
+package com.ktds.devpro.community.mapper;
 
 import java.util.List;
 

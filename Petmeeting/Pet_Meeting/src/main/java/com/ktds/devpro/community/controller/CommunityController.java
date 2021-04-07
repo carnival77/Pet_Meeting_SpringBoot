@@ -1,4 +1,4 @@
-package com.pm.app.community.controller;
+package com.ktds.devpro.community.controller;
 
 import java.util.List;
 import java.util.Map;

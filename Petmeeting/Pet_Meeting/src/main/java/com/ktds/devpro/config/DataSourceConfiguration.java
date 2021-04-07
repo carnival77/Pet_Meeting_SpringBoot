@@ -1,4 +1,4 @@
-package com.pm.config;
+package com.ktds.devpro.config;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -41,44 +41,39 @@ import javax.sql.DataSource;
 @Configuration
 @EnableConfigurationProperties
 @EnableTransactionManagement
-@MapperScan(basePackages="com.pm.app", sqlSessionFactoryRef="sqlSessionFactory")
+@MapperScan(basePackages = "com.ktds.devpro", sqlSessionFactoryRef = "sqlSessionFactory")
 public class DataSourceConfiguration {
 
-//    @ConfigurationProperties(prefix="spring.datasource.hikari.h2")
-//    @ConfigurationProperties(prefix="spring.datasource.hikari.maria")
-    @Primary
-    @Bean(name="dataSource", destroyMethod = "close")
-    @ConfigurationProperties(prefix="spring.datasource.hikari.mysql")
-    public DataSource dataSource() {
-        return DataSourceBuilder.create().type(HikariDataSource.class).build();
-    }
+	@Primary
+	@Bean(name = "dataSource", destroyMethod = "close")
+	@ConfigurationProperties(prefix = "spring.datasource.hikari.mysql")
+	public DataSource dataSource() {
+		return DataSourceBuilder.create().type(HikariDataSource.class).build();
+	}
 
-    @Bean(name = "sqlSessionFactory")
-    public SqlSessionFactory sqlSessionFactory(@Qualifier("dataSource") DataSource dataSource, ApplicationContext applicationContext) throws Exception {
-        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-        sqlSessionFactoryBean.setDataSource(dataSource);
-        sqlSessionFactoryBean.setTypeAliasesPackage("com.pm");
-//        sqlSessionFactoryBean.setTypeAliasesPackage("com.ktds.devpro.sample");
-        //sqlSessionFactoryBean.setTypeAliasesPackage("com.ktds.devpro.recommend");
-        sqlSessionFactoryBean.setConfigLocation(applicationContext.getResource("classpath:mybatis-config.xml"));
-//        sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:mapper/*.xml"));
-        sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath:mapper/**/sample/**/*.xml"));
-        
+	@Bean(name = "sqlSessionFactory")
+	public SqlSessionFactory sqlSessionFactory(@Qualifier("dataSource") DataSource dataSource,
+			ApplicationContext applicationContext) throws Exception {
+		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+		sqlSessionFactoryBean.setDataSource(dataSource);
+		sqlSessionFactoryBean.setTypeAliasesPackage("com.ktds.devpro.sample");
+		sqlSessionFactoryBean.setConfigLocation(applicationContext.getResource("classpath:mybatis-config.xml"));
+		sqlSessionFactoryBean
+				.setMapperLocations(applicationContext.getResources("classpath:mapper/**/sample/**/*.xml"));
 
-        return sqlSessionFactoryBean.getObject();
-    }
+		return sqlSessionFactoryBean.getObject();
+	}
 
-    @Bean(name = "sqlSessionTemplate", destroyMethod = "clearCache")
-    public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) throws Exception {
-        return new SqlSessionTemplate(sqlSessionFactory);
-    }
+	@Bean(name = "sqlSessionTemplate", destroyMethod = "clearCache")
+	public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) throws Exception {
+		return new SqlSessionTemplate(sqlSessionFactory);
+	}
 
-    @Bean
-    public PlatformTransactionManager transactionManager(@Qualifier("dataSource") DataSource dataSource) {
-        DataSourceTransactionManager transactionManager = new DataSourceTransactionManager(dataSource);
-        transactionManager.setGlobalRollbackOnParticipationFailure(false);
-        return transactionManager;
-    }
-
+	@Bean
+	public PlatformTransactionManager transactionManager(@Qualifier("dataSource") DataSource dataSource) {
+		DataSourceTransactionManager transactionManager = new DataSourceTransactionManager(dataSource);
+		transactionManager.setGlobalRollbackOnParticipationFailure(false);
+		return transactionManager;
+	}
 
 }

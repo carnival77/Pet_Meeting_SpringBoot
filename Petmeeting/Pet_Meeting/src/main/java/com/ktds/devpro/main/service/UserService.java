@@ -6,8 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pm.app.main.mapper.UserMapper;
-import com.pm.app.main.vo.UserVO;
+import com.ktds.devpro.main.mapper.UserMapper;
+import com.ktds.devpro.main.vo.UserVO;
 
 @Service
 public class UserService {

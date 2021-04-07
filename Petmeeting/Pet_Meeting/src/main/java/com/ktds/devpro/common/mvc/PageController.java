@@ -1,4 +1,4 @@
-package com.pm.common.mvc;
+package com.ktds.devpro.common.mvc;
 
 import org.springframework.beans.factory.annotation.Value;
 

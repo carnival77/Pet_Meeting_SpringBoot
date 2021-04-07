@@ -1,4 +1,4 @@
-package com.pm.app.application.vo;
+package com.ktds.devpro.application.vo;
 
 import java.sql.Date;
 

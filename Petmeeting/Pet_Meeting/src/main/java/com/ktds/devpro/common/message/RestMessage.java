@@ -1,4 +1,4 @@
-package com.pm.common.message;
+package com.ktds.devpro.common.message;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;

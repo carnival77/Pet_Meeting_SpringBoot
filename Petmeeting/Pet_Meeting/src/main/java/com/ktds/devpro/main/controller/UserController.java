@@ -18,19 +18,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.pm.app.main.service.UserService;
-import com.pm.app.main.vo.UserVO;
+import com.ktds.devpro.main.service.UserService;
+import com.ktds.devpro.main.vo.UserVO;
 
 @RestController
 @RequestMapping("/service")
 public class UserController {
-	
+
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-   @Autowired
-   public UserService service;
+	@Autowired
+	public UserService service;
 
-   @GetMapping
+	@GetMapping
 	public List<UserVO> getUserList() {
 		logger.debug(">> User 전체목록 조회");
 		return service.getUserList();
@@ -44,7 +44,7 @@ public class UserController {
 		}
 		return ResponseEntity.status(HttpStatus.OK).body(user);
 	}
-	
+
 	@PostMapping
 	public ResponseEntity<?> registerUser(@RequestBody UserVO paramVo) {
 		// @RequestBody : 클라이언트로부터 얻는 json Body(VO)
@@ -59,20 +59,21 @@ public class UserController {
 	// pwd를 입력 받고 uid를 제외한 다른 특성들을 모두 바꿀 수 있다.
 	@PutMapping("/{pwd}")
 	public ResponseEntity<?> updateUser(@PathVariable String pwd, @RequestBody UserVO paramVo) {
-		
-		if(pwd == paramVo.getPassword()) {
+
+		if (pwd == paramVo.getPassword()) {
 			logger.debug(">>> Update Manager 입력 " + paramVo);
 			int cnt = service.updateUser(paramVo);
 			if (cnt == 1) {
 				return ResponseEntity.status(HttpStatus.OK).body(service.getUserList());
 			} else {
-				return new ResponseEntity<>("User update failed. inserted info is wrong", HttpStatus.INTERNAL_SERVER_ERROR);
+				return new ResponseEntity<>("User update failed. inserted info is wrong",
+						HttpStatus.INTERNAL_SERVER_ERROR);
 			}
-		}else {
+		} else {
 			return new ResponseEntity<>("User update failed.  Password is wrong", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 	@DeleteMapping("/{pwd}")
 	public ResponseEntity<?> deleteManager(@PathVariable String pwd) {
 		int cnt = service.deleteUser(pwd);

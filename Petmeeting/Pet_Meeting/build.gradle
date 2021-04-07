@@ -1,13 +1,11 @@
 plugins {
-	// id 'org.springframework.boot' version '2.4.4'
-	// id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-		id 'org.springframework.boot' version '2.2.1.RELEASE'
+	id 'org.springframework.boot' version '2.2.1.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'java'
-		id 'war'
+	id 'war'
 }
 
-group = 'com.pm'
+group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
@@ -26,77 +24,95 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-websocket'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	
 	//spring boot default lib
-	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.0.1'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.1'
 	
-	// https://mvnrepository.com/artifact/org.mybatis/mybatis
-implementation group: 'org.mybatis', name: 'mybatis', version: '3.5.6'
-	
-	// https://mvnrepository.com/artifact/org.mybatis/mybatis-spring
-implementation group: 'org.mybatis', name: 'mybatis-spring', version: '2.0.1'
+	// Monitoring and managing tool
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
-// https://mvnrepository.com/artifact/org.springframework/spring-jdbc
-implementation group: 'org.springframework', name: 'spring-jdbc', version: '5.3.5'
-
-
-// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-jdbc
-implementation group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: '2.4.2'
-
-// https://mvnrepository.com/artifact/mysql/mysql-connector-java
-//implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.23'
-	// mysql
-	implementation 'mysql:mysql-connector-java'
-
-// https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2
-implementation group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.8.0'
-
-	
-	
-		// Database �ʱ�ȭ �� JPA ���̺귯��
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	
-		// ���� JSP ���̺귯��
-	//providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
-	implementation 'javax.servlet:jstl'
-	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
-	
-	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-tomcat
-implementation group: 'org.springframework.boot', name: 'spring-boot-starter-tomcat', version: '2.4.4'
-	
-	
-		//anotation lib
+	//anotation lib
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	
-		// ������ ��Ʈ ���� ��(Ŭ���� �ڵ� ���δ� ��)
+	// 스프링 부트 개발 툴(클래스 자동 리로더 등)
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	
-		//test lib
+	//liteweghit db
+	runtimeOnly 'com.h2database:h2'
+	runtimeOnly 'org.hsqldb:hsqldb'
+	
+	//test lib
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		//exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
+	
+	// 테스트 프레임워크(Spock) 라이브러리
+//	testCompile 'org.springframework.boot:spring-boot-starter-test'
+//	testCompile 'org.spockframework:spock-core:1.1-groovy-2.4-rc-3'
+//	testCompile 'org.spockframework:spock-spring:1.1-groovy-2.4-rc-3'
+//	testRuntime 'cglib:cglib-nodep:3.2.4'
+	
+	// 추가 라이브러리 시작 ...
+	// https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client
+	// compile group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.7.2'
 
-	// https://mvnrepository.com/artifact/org.apache.commons/commons-collections4
-implementation group: 'org.apache.commons', name: 'commons-collections4', version: '4.4'
+// https://mvnrepository.com/artifact/mysql/mysql-connector-java
+// implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.22'
+	// mysql
+	implementation 'mysql:mysql-connector-java'
+
+// https://mvnrepository.com/artifact/org.javassist/javassist
+//	implementation group: 'org.javassist', name: 'javassist', version: '3.27.0-GA'
 	
+	//유용 라이브러리 모음
+	implementation 'org.apache.commons:commons-lang3:3.6'
+
+	// 분산 트랙잭션 라이브러리
+	//implementation 'org.springframework.boot:spring-boot-starter-jta-atomikos'
+
+	// 서블릿 JSP 라이브러리
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	implementation 'javax.servlet:jstl'
+	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
 	
-	// https://mvnrepository.com/artifact/commons-io/commons-io
-implementation group: 'commons-io', name: 'commons-io', version: '2.8.0'
+	// Database 초기화 및 JPA 라이브러리
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+
+	// Apache Common 라이브러리
+	implementation 'org.apache.commons:commons-collections4:4.0'
 	
-	
-		// �׽�Ʈ �����ӿ�ũ(Spock) ���� ��ũ��Ʈ(Groovy) ���̺귯��
+	// 테스트 프레임워크(Spock) 적용 스크립트(Groovy) 라이브러리
 	implementation 'org.codehaus.groovy:groovy-all:2.5.8'
 	
-	// https://mvnrepository.com/artifact/junit/junit
-testImplementation group: 'junit', name: 'junit', version: '4.13.1'
-	
+	// Log4j2 라이브러리
+	implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+//	compile("org.apache.logging.log4j:log4j-core:2.7")
+//	compile("org.apache.logging.log4j:log4j-slf4j-impl:2.7")
+	implementation'com.lmax:disruptor:3.3.6'
+
+	// Log4j2 충돌 제외 라이브러리
+	configurations {
+	    all {
+	        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+	    }
+	}
+
 }
 
 test {
 	useJUnitPlatform()
 }
+
+war {
+	baseName = 'PetMeeting'
+	version = '0.0.1-SNAPSHOT'
+}
+
+task local {
+	bootRun {
+		systemProperty("spring.profiles.active", "local")
+	}
+}
+

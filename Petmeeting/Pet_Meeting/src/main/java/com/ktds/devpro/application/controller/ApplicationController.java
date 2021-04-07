@@ -1,4 +1,4 @@
-package com.pm.app.application.controller;
+package com.ktds.devpro.application.controller;
 
 import java.util.List;
 import java.util.Map;

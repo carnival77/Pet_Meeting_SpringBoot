@@ -13,8 +13,6 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-
-
 import java.util.List;
 import java.util.Locale;
 
@@ -39,89 +37,93 @@ import java.util.Locale;
 @Configuration
 public class WebMvcConfiguration implements WebMvcConfigurer {
 
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("forward:/index.html");
-    }
+	@Override
+	public void addViewControllers(ViewControllerRegistry registry) {
+		registry.addViewController("/").setViewName("forward:/index.html");
+	}
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
-    }
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
+	}
 
-    @Override
-    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
-        argumentResolvers.add(new MessageArgumentResolver());
-    }
+	@Override
+	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+		argumentResolvers.add(new MessageArgumentResolver());
+	}
 
-    @Override
-    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-        configurer.enable();
-    }
+	@Override
+	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+		configurer.enable();
+	}
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(localeChangeInterceptor());
-        registry.addInterceptor(new WebInterceptor());
-    }
-    
-    //
-    
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-        .allowedOrigins("*")
-        .allowedMethods("GET", "POST","PUT","DELETE");;
-    }
-    
-    //ref : https://dev-pengun.tistory.com/entry/Spring-Boot-CORS-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0
-    
-    // 
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(localeChangeInterceptor());
+		registry.addInterceptor(new WebInterceptor());
+	}
 
-    /**
-     * InternalResourceViewResolver 재정의
-     * @return
-     */
-    @Bean
-    public InternalResourceViewResolver jspViewResolver() {
-        InternalResourceViewResolver resolver= new InternalResourceViewResolver();
-        resolver.setPrefix("/WEB-INF/jsp/");
-        resolver.setSuffix(".jsp");
-        return resolver;
-    }
+	//
 
-    /**
-     * 메지시 재정의
-     * @return
-     */
-    @Bean
-    public ReloadableResourceBundleMessageSource messageSource() {
-        ReloadableResourceBundleMessageSource source = new ReloadableResourceBundleMessageSource();
-        source.setDefaultEncoding("UTF-8");
-        source.setBasenames("classpath:i18n/messages");
-        return source;
-    }
+	@Override
+	public void addCorsMappings(CorsRegistry registry) {
+		registry.addMapping("/**").allowedOrigins("*").allowedMethods("GET", "POST", "PUT", "DELETE");
+		;
+	}
 
-    /**
-     * 다국어 처리
-     * @return
-     */
-    @Bean
-    public LocaleChangeInterceptor localeChangeInterceptor(){
-        LocaleChangeInterceptor localeChangeInterceptor=new LocaleChangeInterceptor();
-        localeChangeInterceptor.setParamName("lang");
-        return localeChangeInterceptor;
-    }
+	// ref :
+	// https://dev-pengun.tistory.com/entry/Spring-Boot-CORS-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0
 
-    /**
-     * 다국어 처리
-     * @return
-     */
-    @Bean(name = "localeResolver")
-    public LocaleResolver sessionLocaleResolver(){
-        //SessionLocaleResolver localeResolver=new SessionLocaleResolver();
-        CookieLocaleResolver localeResolver = new CookieLocaleResolver();
-        localeResolver.setDefaultLocale(Locale.KOREAN);
-        return localeResolver;
-    }
+	//
+
+	/**
+	 * InternalResourceViewResolver 재정의
+	 * 
+	 * @return
+	 */
+	@Bean
+	public InternalResourceViewResolver jspViewResolver() {
+		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+		resolver.setPrefix("/WEB-INF/jsp/");
+		resolver.setSuffix(".jsp");
+		return resolver;
+	}
+
+	/**
+	 * 메지시 재정의
+	 * 
+	 * @return
+	 */
+	@Bean
+	public ReloadableResourceBundleMessageSource messageSource() {
+		ReloadableResourceBundleMessageSource source = new ReloadableResourceBundleMessageSource();
+		source.setDefaultEncoding("UTF-8");
+		source.setBasenames("classpath:i18n/messages");
+		return source;
+	}
+
+	/**
+	 * 다국어 처리
+	 * 
+	 * @return
+	 */
+	@Bean
+	public LocaleChangeInterceptor localeChangeInterceptor() {
+		LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
+		localeChangeInterceptor.setParamName("lang");
+		return localeChangeInterceptor;
+	}
+
+	/**
+	 * 다국어 처리
+	 * 
+	 * @return
+	 */
+	@Bean(name = "localeResolver")
+	public LocaleResolver sessionLocaleResolver() {
+		// SessionLocaleResolver localeResolver=new SessionLocaleResolver();
+		CookieLocaleResolver localeResolver = new CookieLocaleResolver();
+		localeResolver.setDefaultLocale(Locale.KOREAN);
+		return localeResolver;
+	}
 }

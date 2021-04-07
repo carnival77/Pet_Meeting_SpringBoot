@@ -1,6 +1,6 @@
-package com.pm.common.message;
+package com.ktds.devpro.common.message;
 
-import com.pm.common.Const;
+import com.ktds.devpro.common.Const;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.MethodParameter;

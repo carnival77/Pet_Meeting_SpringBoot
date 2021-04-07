@@ -1,4 +1,4 @@
-package com.pm.app.application.mapper;
+package com.ktds.devpro.application.mapper;
 
 import java.util.List;
 
