@@ -1,6 +1,8 @@
 -- -----------------------------------------------------
 -- Schema petmeeting
 -- -----------------------------------------------------
+DROP SCHEMA IF EXISTS `petmeeting` ;
+
 CREATE SCHEMA IF NOT EXISTS `petmeeting`;
 USE `petmeeting`;
 

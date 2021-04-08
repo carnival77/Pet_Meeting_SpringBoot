@@ -23,16 +23,16 @@ INSERT INTO `petmeeting`.`User` (`UID`, `Username`, `Password`, `ImgID`, `Email`
 COMMIT;
 
 -- User 테이블의 username을 unique로 변경
-alter table user
-modify column Username varchar(50) unique;
+-- alter table user
+-- modify column Username varchar(50) unique;
 
-alter table user
-modify column Email varchar(50) unique;
+-- alter table user
+-- modify column Email varchar(50) unique;
 
-alter table user
-modify column Phone varchar(45) unique;
+-- alter table user
+-- modify column Phone varchar(45) unique;
 
-commit;
+-- commit;
 
 START TRANSACTION;
 USE `petmeeting`;
